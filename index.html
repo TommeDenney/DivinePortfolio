@@ -722,7 +722,32 @@ footer p{font-size:0.75rem;letter-spacing:0.05em;font-weight:300}
     <div class="section-label">Field Notes</div>
     <h2 class="section-title">From the<br><em>field</em></h2>
   </div>
-  <div class="gallery-grid" data-folder="assets/images/gallery"></div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-01.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-01.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-02.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-02.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-03.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-03.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-04.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-04.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-05.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-05.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-06.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-06.jpg</p></div>
+    </div>
+  </div>
 </section>
 
 <!-- CONTACT -->
@@ -748,42 +773,75 @@ footer p{font-size:0.75rem;letter-spacing:0.05em;font-weight:300}
 </footer>
 
 <script>
-const nav = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 10);
-});
+    // ── NAV scroll shadow + active link ──────────────────────────────────────────
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
 
-const toggle = document.getElementById('navToggle');
-const menu = document.getElementById('mobileMenu');
-toggle.addEventListener('click', () => menu.classList.toggle('open'));
-menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+    // ── MOBILE menu toggle ────────────────────────────────────────────────────────
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('mobileMenu');
+    toggle.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a =>
+        a.addEventListener('click', () => menu.classList.remove('open'))
+    );
 
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold: 0.1});
-document.querySelectorAll('.exp-item').forEach(el => obs.observe(el));
+    // ── EXPERIENCE timeline fade-in on scroll ────────────────────────────────────
+    const expObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.exp-item').forEach(el => expObs.observe(el));
 
-function probeImages(folder, container, index) {
-  const exts = ['jpg','png','jpeg','webp'];
-  let tried = 0;
-  function tryNext(extIndex) {
-    if (extIndex >= exts.length) return;
-    const img = new Image();
-    const src = `${folder}/${index}.${exts[extIndex]}`;
-    img.onload = () => {
-      img.src = src;
-      container.appendChild(img);
-      probeImages(folder, container, index + 1);
-    };
-    img.onerror = () => tryNext(extIndex + 1);
-    img.src = src;
-  }
-  tryNext(0);
-}
+    // ── IMAGE PROBE ───────────────────────────────────────────────────────────────
+    // For a given folder, probes 0, 1, 2, … trying jpg → png → jpeg → webp
+    // for each index. Stops as soon as all four extensions fail for an index.
+    // Appends found images into the target container as a horizontal scroll strip.
 
-document.querySelectorAll('.exp-photos').forEach(container => {
-  probeImages(container.dataset.folder, container, 0);
-});
+    const EXTS = ['jpg', 'png', 'jpeg', 'webp'];
+
+    function probeImage(src) {
+        // Returns a Promise that resolves with the src if it loads, rejects otherwise.
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(src);
+            img.onerror = () => reject();
+            img.src = src;
+        });
+    }
+
+    async function tryExtensions(folder, index) {
+        // Returns the first loadable src for this index, or null if none load.
+        for (const ext of EXTS) {
+            try {
+                const src = await probeImage(`${folder}/${index}.${ext}`);
+                return src;
+            } catch (_) { /* try next */ }
+        }
+        return null;
+    }
+
+    async function probeFolder(folder, container) {
+        let index = 0;
+        while (true) {
+            const src = await tryExtensions(folder, index);
+            if (!src) break; // no extension worked — folder exhausted
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = '';
+            container.appendChild(img);
+            index++;
+        }
+    }
+
+    // Wire up every .exp-photos strip
+    document.querySelectorAll('.exp-photos').forEach(container => {
+        probeFolder(container.dataset.folder, container);
+    });
+
+    // ── GALLERY probe (assets/images/gallery/0, 1, 2 …) ─────────────────────────
+    // If you have a .gallery-grid with items that use data-folder, same logic.
+    // Otherwise images are loaded directly — no probe needed for static gallery.
 </script>
 </body>
 </html>
