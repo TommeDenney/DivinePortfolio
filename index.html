@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divine Siam — Climate & Social-Ecological Researcher</title>
+
+<!--
+==============================================
+  FOLDER STRUCTURE — add your media here
+==============================================
+assets/
+├── images/
+│   ├── hero.jpg             ← main portrait (hero section, right panel)
+│   ├── about.jpg            ← candid / field photo (about section)
+│   ├── experience/
+│   │   ├── lamont.jpg       ← Lamont-Doherty card photo
+│   │   ├── cerf.jpg         ← CERF conference / scholar photo
+│   │   ├── conservancy.jpg  ← Conservancy of SW Florida
+│   │   ├── cambodia.jpg     ← School for Field Studies / Cambodia
+│   │   ├── waquoit.jpg      ← Waquoit Bay research
+│   │   └── mit.jpg          ← MIT salt marsh fieldwork
+│   └── gallery/
+│       ├── field-01.jpg     ← any field / research photos
+│       ├── field-02.jpg
+│       ├── field-03.jpg
+│       ├── field-04.jpg
+│       ├── field-05.jpg
+│       └── field-06.jpg
+==============================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --forest:#1A3328;
+  --forest-mid:#2A5040;
+  --sage:#4E7D62;
+  --sage-light:#7FAE90;
+  --sage-pale:#C8DECE;
+  --sage-mist:#E8F2EC;
+  --cream:#F6F1E9;
+  --warm-white:#FAFAF6;
+  --text-dark:#141C18;
+  --text-mid:#3D5447;
+  --text-muted:#6B8478;
+  --accent:#A67C52;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --max:1200px;
+  --radius:4px;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text-dark);background:var(--warm-white);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(1.5rem,5vw,4rem);height:64px;
+  background:rgba(250,250,246,0.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(78,125,98,0.12);
+  transition:box-shadow 0.3s;
+}
+nav.scrolled{box-shadow:0 1px 20px rgba(26,51,40,0.06)}
+.nav-logo{font-family:var(--serif);font-size:1.2rem;font-weight:600;letter-spacing:0.02em;color:var(--forest)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.8rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mid);transition:color 0.2s}
+.nav-links a:hover{color:var(--forest)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:var(--forest);transition:all 0.3s}
+.mobile-menu{display:none}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  margin-top:0;padding-top:64px;
+}
+.hero-text{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(3rem,8vw,6rem) clamp(1.5rem,5vw,5rem) clamp(3rem,8vw,6rem) clamp(1.5rem,6vw,6rem);
+  background:var(--cream);
+}
+.hero-eyebrow{
+  font-size:0.72rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--sage);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;
+}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--sage)}
+.hero-title{
+  font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:300;
+  line-height:1.05;color:var(--forest);margin-bottom:1.5rem;letter-spacing:-0.01em;
+}
+.hero-title em{font-style:italic;font-weight:300;color:var(--sage)}
+.hero-desc{
+  font-size:1rem;font-weight:300;color:var(--text-mid);
+  max-width:440px;margin-bottom:2.5rem;line-height:1.8;
+}
+.hero-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:3rem}
+.tag{
+  font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:400;
+  padding:5px 12px;border:1px solid var(--sage-light);
+  color:var(--text-mid);border-radius:2px;
+}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{
+  font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;
+  padding:12px 24px;border-radius:2px;transition:all 0.2s;cursor:pointer;
+}
+.btn-primary{background:var(--forest);color:#fff;border:1px solid var(--forest)}
+.btn-primary:hover{background:var(--forest-mid)}
+.btn-outline{background:transparent;color:var(--forest);border:1px solid var(--forest)}
+.btn-outline:hover{background:var(--forest);color:#fff}
+.hero-photo{
+  position:relative;overflow:hidden;
+  background:var(--sage-pale);
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-photo-placeholder{
+  width:100%;height:100%;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:0.75rem;color:var(--sage-light);
+}
+.hero-photo-placeholder svg{width:48px;height:48px;opacity:0.4}
+.hero-photo-placeholder p{font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;opacity:0.5}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);
+}
+.hero-scroll-line{width:1px;height:40px;background:var(--sage-light);animation:scrollPulse 2s infinite}
+@keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(0.6)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ── SECTION COMMON ── */
+section{padding:clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,4rem)}
+.section-inner{max-width:var(--max);margin:0 auto}
+.section-label{
+  font-size:0.7rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--sage);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;
+}
+.section-label::before{content:'';display:block;width:24px;height:1px;background:var(--sage)}
+.section-title{
+  font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;
+  color:var(--forest);line-height:1.15;margin-bottom:3rem;
+}
+.section-title em{font-style:italic}
+
+/* ── ABOUT ── */
+#about{background:var(--warm-white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.about-photo{
+  aspect-ratio:4/5;border-radius:2px;overflow:hidden;
+  background:var(--sage-pale);position:relative;
+}
+.about-photo img{transition:transform 0.5s ease}
+.about-photo:hover img{transform:scale(1.03)}
+.about-text p{
+  font-size:1.05rem;font-weight:300;color:var(--text-mid);
+  line-height:1.85;margin-bottom:1.5rem;
+}
+.about-text p:first-of-type{
+  font-family:var(--serif);font-size:1.4rem;font-weight:300;
+  color:var(--forest);line-height:1.6;margin-bottom:2rem;
+}
+.about-skills{margin-top:2rem;display:flex;flex-wrap:wrap;gap:0.5rem}
+
+/* ── RESEARCH ── */
+#research{background:var(--cream)}
+.research-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5px;
+  background:var(--sage-light);border:1.5px solid var(--sage-light);
+}
+.research-card{
+  background:var(--cream);padding:2.5rem 2rem;
+  transition:background 0.3s;
+}
+.research-card:hover{background:var(--sage-mist)}
+.research-number{
+  font-family:var(--serif);font-size:2rem;font-weight:300;
+  color:var(--sage-light);line-height:1;margin-bottom:1.25rem;
+}
+.research-card h3{
+  font-family:var(--serif);font-size:1.2rem;font-weight:400;
+  color:var(--forest);margin-bottom:0.75rem;
+}
+.research-card p{font-size:0.88rem;font-weight:300;color:var(--text-mid);line-height:1.7}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--warm-white)}
+.exp-timeline{position:relative;padding-left:2rem}
+.exp-timeline::before{
+  content:'';position:absolute;left:0;top:8px;bottom:8px;
+  width:1px;background:var(--sage-pale);
+}
+.exp-item{
+  position:relative;margin-bottom:4rem;padding-left:2rem;
+  opacity:0;transform:translateY(20px);
+  transition:opacity 0.5s ease,transform 0.5s ease;
+}
+.exp-item.visible{opacity:1;transform:translateY(0)}
+.exp-dot{
+  position:absolute;left:-2.5rem;top:6px;
+  width:10px;height:10px;border-radius:50%;
+  border:2px solid var(--sage);background:var(--warm-white);
+  transition:background 0.3s;
+}
+.exp-item:hover .exp-dot{background:var(--sage)}
+.exp-meta{
+  display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;flex-wrap:wrap;
+}
+.exp-date{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);font-weight:400}
+.exp-type{
+  font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:3px 10px;border:1px solid var(--sage-pale);color:var(--text-muted);border-radius:2px;
+}
+.exp-org{font-family:var(--serif);font-size:0.95rem;font-weight:400;color:var(--sage);margin-bottom:0.25rem}
+.exp-title{font-family:var(--serif);font-size:1.4rem;font-weight:400;color:var(--forest);margin-bottom:1rem;line-height:1.3}
+.exp-desc{font-size:0.9rem;font-weight:300;color:var(--text-mid);line-height:1.75;max-width:640px}
+.exp-desc ul{margin:0.75rem 0 0 1.2rem}
+.exp-desc li{margin-bottom:0.4rem}
+.exp-photo{
+  margin-top:1.25rem;height:220px;border-radius:2px;
+  overflow:hidden;background:var(--sage-pale);max-width:480px;
+}
+
+/* ── RECOGNITION ── */
+#recognition{background:var(--forest);color:var(--cream)}
+#recognition .section-label{color:var(--sage-light)}
+#recognition .section-label::before{background:var(--sage-light)}
+#recognition .section-title{color:var(--cream)}
+.rec-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5px;
+  background:rgba(200,222,206,0.15);border:1.5px solid rgba(200,222,206,0.15);
+  margin-bottom:4rem;
+}
+.rec-card{
+  background:var(--forest);padding:2.5rem 2rem;
+  transition:background 0.3s;
+}
+.rec-card:hover{background:var(--forest-mid)}
+.rec-year{
+  font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--sage-light);margin-bottom:1rem;font-weight:400;
+}
+.rec-card h3{
+  font-family:var(--serif);font-size:1.25rem;font-weight:400;
+  color:var(--cream);margin-bottom:0.5rem;
+}
+.rec-card p{font-size:0.85rem;font-weight:300;color:var(--sage-pale);line-height:1.7}
+.rec-issuer{
+  font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--sage-light);margin-top:1rem;font-weight:400;
+}
+
+/* ── EDUCATION ── */
+#education{background:var(--cream)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.edu-card{
+  border:1px solid var(--sage-pale);border-radius:2px;padding:2rem;
+  background:var(--warm-white);transition:border-color 0.2s;
+}
+.edu-card:hover{border-color:var(--sage-light)}
+.edu-card.featured{
+  border-color:var(--sage);background:var(--sage-mist);
+}
+.edu-degree{
+  font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--sage);margin-bottom:0.75rem;font-weight:500;
+}
+.edu-card h3{
+  font-family:var(--serif);font-size:1.35rem;font-weight:400;
+  color:var(--forest);margin-bottom:0.3rem;
+}
+.edu-field{font-size:0.95rem;font-weight:300;color:var(--text-mid);margin-bottom:0.5rem}
+.edu-years{font-size:0.8rem;color:var(--text-muted);font-weight:300;margin-bottom:1rem}
+.edu-note{font-size:0.82rem;font-weight:300;color:var(--text-mid);line-height:1.65;font-style:italic}
+
+/* ── PROJECT ── */
+#projects{background:var(--warm-white)}
+.project-card{
+  border:1px solid var(--sage-pale);border-radius:2px;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1.5fr;transition:border-color 0.2s;
+}
+.project-card:hover{border-color:var(--sage)}
+.project-photo{background:var(--sage-pale);min-height:280px}
+.project-body{padding:3rem}
+.project-body h3{
+  font-family:var(--serif);font-size:1.5rem;font-weight:400;
+  color:var(--forest);line-height:1.3;margin-bottom:0.75rem;
+}
+.project-body .exp-meta{margin-bottom:1rem}
+.project-body p{font-size:0.9rem;font-weight:300;color:var(--text-mid);line-height:1.8;margin-bottom:1.5rem}
+
+/* ── GALLERY ── */
+#gallery{background:var(--forest);padding-bottom:0}
+#gallery .section-label{color:var(--sage-light)}
+#gallery .section-label::before{background:var(--sage-light)}
+#gallery .section-title{color:var(--cream);margin-bottom:2.5rem}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto;
+  gap:3px;
+}
+.gallery-item{
+  overflow:hidden;background:var(--forest-mid);cursor:pointer;
+  aspect-ratio:4/3;position:relative;
+}
+.gallery-item.tall{aspect-ratio:3/4;grid-row:span 1}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.gallery-item:hover img{transform:scale(1.05)}
+.gallery-item-ph{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:0.5rem;
+}
+.gallery-item-ph p{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(200,222,206,0.4)}
+
+/* ── CONTACT ── */
+#contact{background:var(--sage-mist)}
+.contact-inner{
+  max-width:640px;margin:0 auto;text-align:center;
+}
+.contact-inner .section-label{justify-content:center}
+.contact-inner .section-label::before{display:none}
+.contact-inner .section-title{margin-bottom:1.5rem}
+.contact-inner p{font-size:1rem;font-weight:300;color:var(--text-mid);line-height:1.8;margin-bottom:2.5rem}
+.contact-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.contact-link{
+  font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;
+  padding:13px 28px;border:1px solid var(--forest);color:var(--forest);
+  border-radius:2px;transition:all 0.2s;
+}
+.contact-link:hover{background:var(--forest);color:var(--cream)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--forest);color:var(--sage-light);
+  padding:2rem clamp(1.5rem,5vw,4rem);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+footer .nav-logo{color:var(--sage-pale)}
+footer p{font-size:0.75rem;letter-spacing:0.05em;font-weight:300}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr}
+  .hero-photo{height:55vw;min-height:320px}
+  .hero-title{font-size:clamp(2.5rem,8vw,4rem)}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .about-photo{aspect-ratio:16/9}
+  .edu-grid{grid-template-columns:1fr}
+  .project-card{grid-template-columns:1fr}
+  .project-photo{min-height:200px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .mobile-menu.open{
+    display:flex;flex-direction:column;
+    position:fixed;top:64px;left:0;right:0;
+    background:var(--warm-white);padding:2rem;gap:1.5rem;
+    border-bottom:1px solid var(--sage-pale);z-index:99;
+  }
+  .mobile-menu a{font-size:1rem;color:var(--text-dark);letter-spacing:0.08em;text-transform:uppercase}
+  .gallery-grid{grid-template-columns:1fr}
+  .exp-timeline{padding-left:1.5rem}
+  .exp-item{padding-left:1.5rem}
+  .exp-dot{left:-2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Divine Siam</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#recognition">Recognition</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about">About</a>
+  <a href="#research">Research</a>
+  <a href="#experience">Experience</a>
+  <a href="#recognition">Recognition</a>
+  <a href="#education">Education</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Climate · Ecology · Justice</div>
+    <h1 class="hero-title">
+      Centering<br>
+      People &<br>
+      <em>Planet</em>
+    </h1>
+    <p class="hero-desc">
+      Divine Siam is a coastal and social-ecological researcher at Columbia Climate School and Lamont-Doherty Earth Observatory, working at the intersection of climate science, Indigenous knowledge systems, and environmental justice.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Coastal Ecology</span>
+      <span class="tag">Social-Ecological Systems</span>
+      <span class="tag">Indigenous Knowledge</span>
+      <span class="tag">Climate Adaptation</span>
+      <span class="tag">Fieldwork</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#research" class="btn btn-primary">View Research</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <img src="./assets/images/hero.jpg" alt="Divine Siam" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="hero-photo-placeholder" style="display:none">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="18" r="8" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <p>hero.jpg</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="./assets/images/about.jpg" alt="Divine in the field" onerror="this.style.display='none'">
+      </div>
+      <div class="about-text">
+        <div class="section-label">About</div>
+        <h2 class="section-title">Rooted in <em>field, community,<br>& science</em></h2>
+        <p>
+          Divine is a graduate student in the MS Climate program at Columbia University's Climate School, where she is also a Student Council Representative for the Columbia Climate Graduate Council. She is currently a Research Assistant at Lamont-Doherty Earth Observatory, contributing to MacArthur Fellow Dr. Kristina Douglass's Olo Be Taloha Lab.
+        </p>
+        <p>
+          Her work spans coastal ecology, transdisciplinary research methods, and community-based approaches to climate adaptation. She integrates Local, Indigenous, and Descendant (LID) knowledge systems with geospatial, archaeological, and oral history data to understand how communities adapt to environmental change — particularly in coastal Southwest Madagascar.
+        </p>
+        <p>
+          A CERF Rising TIDES Scholar and Columbia Merit Scholar, Divine brings fieldwork experience across Massachusetts, Cambodia, Florida, and Madagascar, and a deep commitment to ethical data stewardship and knowledge sovereignty.
+        </p>
+        <div class="about-skills">
+          <span class="tag">Ecological Field Sampling</span>
+          <span class="tag">Water Quality Monitoring</span>
+          <span class="tag">Qualitative Research</span>
+          <span class="tag">GIS & Geospatial Data</span>
+          <span class="tag">Oral History Methods</span>
+          <span class="tag">Behavioral Ecology</span>
+          <span class="tag">Environmental Education</span>
+          <span class="tag">Data Stewardship</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH THEMES -->
+<section id="research">
+  <div class="section-inner">
+    <div class="section-label">Research Focus</div>
+    <h2 class="section-title">Areas of <em>inquiry</em></h2>
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="research-number">01</div>
+        <h3>Coastal & Estuarine Ecosystems</h3>
+        <p>Salt marsh dynamics, trophic cascades, sea level rise impacts on coastal plant communities, and the role of indicator species in ecosystem health monitoring.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-number">02</div>
+        <h3>Social-Ecological Systems</h3>
+        <p>Transdisciplinary frameworks that integrate ecological data with social memory, oral history, and ethnohistorical methods to understand human-environment interactions.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-number">03</div>
+        <h3>Indigenous & Local Knowledge</h3>
+        <p>Co-produced research with LID communities that centers knowledge sovereignty, ethical data stewardship, and equitable partnerships between science and local expertise.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-number">04</div>
+        <h3>Climate Adaptation & Livelihoods</h3>
+        <p>Examining how coastal communities adapt to climate-driven environmental change, with a focus on the intersections of ecological resilience and community livelihood strategies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Research &<br><em>fieldwork</em></h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">
+          <span class="exp-date">2024 – Present</span>
+          <span class="exp-type">Research</span>
+        </div>
+        <div class="exp-org">Lamont-Doherty Earth Observatory, Columbia University</div>
+        <h3 class="exp-title">Climate & Social-Ecological Data Research Assistant</h3>
+        <div class="exp-desc">
+          <ul>
+            <li>Contributing to Dr. Kristina Douglass's Olo Be Taloha Lab, which integrates social memory, oral history, and LID knowledge systems to address climate adaptation in coastal Southwest Madagascar.</li>
+            <li>Co-leading development of a transdisciplinary research database integrating 10+ years of climate and social-ecological data, including geospatial datasets, archaeological records, and oral history archives.</li>
+            <li>Supporting ethical data stewardship practices with partner NGO teams, focusing on collaborative data sovereignty and Indigenous knowledge systems.</li>
+          </ul>
+        </div>
+        <div class="exp-photo">
+          <img src="./assets/images/experience/lamont.jpg" alt="Lamont-Doherty" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">
+          <span class="exp-date">2024 – 2024</span>
+          <span class="exp-type">Internship</span>
+        </div>
+        <div class="exp-org">Conservancy of Southwest Florida</div>
+        <h3 class="exp-title">Environmental Education Intern</h3>
+        <div class="exp-desc">
+          <ul>
+            <li>Delivered environmental education programs for diverse audiences including school field trips, after-school groups, camps, and daily visitors.</li>
+            <li>Handled and presented live native wildlife (reptiles, amphibians, invertebrates) during public talks and special events.</li>
+            <li>Developed educational materials focused on conservation, ecosystem health, and climate resilience.</li>
+          </ul>
+        </div>
+        <div class="exp-photo">
+          <img src="./assets/images/experience/conservancy.jpg" alt="Conservancy of SW Florida" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">
+          <span class="exp-date">Apr – May 2023</span>
+          <span class="exp-type">Field Research</span>
+        </div>
+        <div class="exp-org">The School for Field Studies — Siem Reap, Cambodia</div>
+        <h3 class="exp-title">Field Researcher — Directed Research Project</h3>
+        <div class="exp-desc">
+          <ul>
+            <li>Conducted a 6-week comparative study on behavioral adaptations of semi-captive Asian elephants (<em>Elephas maximus</em>), examining human-wildlife conflict and stress-associated stereotypies.</li>
+            <li>Employed continuous and interval sampling methods to quantify behavioral states and human-elephant interactions across multiple individuals.</li>
+            <li>Communicated findings through written reports, data visualizations, and oral presentations to local stakeholders and conservation practitioners.</li>
+          </ul>
+        </div>
+        <div class="exp-photo">
+          <img src="./assets/images/experience/cambodia.jpg" alt="Cambodia fieldwork" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">
+          <span class="exp-date">Jan – May 2023</span>
+          <span class="exp-type">Community Research</span>
+        </div>
+        <div class="exp-org">The School for Field Studies — Cambodia</div>
+        <h3 class="exp-title">Community-Based Student Researcher</h3>
+        <div class="exp-desc">
+          <ul>
+            <li>Conducted participatory research and semi-structured interviews with Indigenous and local communities across floating villages, mountainous regions, and island communities.</li>
+            <li>Documented traditional ecological knowledge (TEK), customary land tenure systems, and community-based natural resource management practices.</li>
+            <li>Analyzed socio-economic and environmental impacts of industrial developments on Indigenous sovereignty, livelihoods, and biodiversity.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">
+          <span class="exp-date">Aug 2022</span>
+          <span class="exp-type">Research</span>
+        </div>
+        <div class="exp-org">MIT Civil & Environmental Engineering</div>
+        <h3 class="exp-title">Research Assistant</h3>
+        <div class="exp-desc">
+          <p>Performed measurements on salt marsh cordgrass (<em>Spartina alterniflora</em> and <em>Spartina patens</em>), evaluating geometry, size, and flexibility to assess their role in wave energy reduction and velocity thresholds.</p>
+        </div>
+        <div class="exp-photo">
+          <img src="./assets/images/experience/mit.jpg" alt="MIT salt marsh research" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">
+          <span class="exp-date">2021 – 2022</span>
+          <span class="exp-type">Research</span>
+        </div>
+        <div class="exp-org">Waquoit Bay National Estuarine Research Reserve</div>
+        <h3 class="exp-title">Environmental Research Technician & Intern</h3>
+        <div class="exp-desc">
+          <ul>
+            <li>Calibrated EXO3 multi-parameter sondes for the System-Wide Monitoring Program (SWMP), tracking water quality parameters including pH, turbidity, salinity, and dissolved oxygen.</li>
+            <li>Surveyed 25+ plant species across 100 permanent salt marsh sentinel sites using point intercept and ocular cover methods to monitor ecosystem response to sea level rise.</li>
+            <li>Identified significant ecological shifts linked to sea level rise, including increased flood-tolerant species and expansion of bare ground.</li>
+            <li>Led educational outreach programs engaging 30+ children in summer science programs.</li>
+          </ul>
+        </div>
+        <div class="exp-photo">
+          <img src="./assets/images/experience/waquoit.jpg" alt="Waquoit Bay fieldwork" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RECOGNITION -->
+<section id="recognition">
+  <div class="section-inner">
+    <div class="section-label">Recognition</div>
+    <h2 class="section-title">Honors &<br><em>awards</em></h2>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-year">2025 – 2026</div>
+        <h3>CERF Rising TIDES Scholar</h3>
+        <p>Selected as 1 of 16 scholars from a global pool of 220 applicants for the Coastal and Estuarine Research Federation's Toward an Inclusive, Diverse, and Enriched Society program.</p>
+        <div class="rec-issuer">Coastal & Estuarine Research Federation</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-year">2026</div>
+        <h3>Columbia Climate School Travel Grant</h3>
+        <p>Awarded a travel grant to support conference attendance and research dissemination activities.</p>
+        <div class="rec-issuer">Columbia Climate School</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-year">2025</div>
+        <h3>Columbia Merit Scholarship</h3>
+        <p>Awarded a merit scholarship upon admission to Columbia University's Climate School in recognition of exceptional academic achievement and scholarly potential.</p>
+        <div class="rec-issuer">Columbia Climate School</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Academic<br><em>background</em></h2>
+    <div class="edu-grid">
+      <div class="edu-card featured">
+        <div class="edu-degree">Current</div>
+        <h3>Columbia University</h3>
+        <div class="edu-field">Master of Science — Climate</div>
+        <div class="edu-years">2025 – 2027</div>
+        <p class="edu-note">Columbia Climate School · Student Council Representative, Columbia Climate Graduate Council (CCGC) · Columbia Merit Scholar</p>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor of Science</div>
+        <h3>University of Massachusetts Boston</h3>
+        <div class="edu-field">Environmental Science</div>
+        <div class="edu-years">2019 – 2024</div>
+        <p class="edu-note">Black Student Center · Sustainability Club · Outdoor Enthusiasts Club · Strong Women Strong Girls</p>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Study Abroad</div>
+        <h3>The School for Field Studies</h3>
+        <div class="edu-field">Environmental Science — Cambodia</div>
+        <div class="edu-years">Spring 2023</div>
+        <p class="edu-note">Coursework in Khmer Language, Conservation Science, Ecosystems & Livelihoods, and Ethics & Development</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECT -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Featured Project</div>
+    <h2 class="section-title">Research<br><em>spotlight</em></h2>
+    <div class="project-card">
+      <div class="project-photo">
+        <img src="./assets/images/experience/waquoit.jpg" alt="Salt marsh research" onerror="this.style.display='none'">
+      </div>
+      <div class="project-body">
+        <div class="exp-meta">
+          <span class="exp-date">2022</span>
+          <span class="exp-type">Research Paper</span>
+        </div>
+        <h3>Trophic Cascades & Imbalance in Coastal Ecosystems</h3>
+        <p>The Combined Impacts of Climate Change, Overfishing, and Predation Loss on <em>Sesarma Reticulatum</em> and Salt Marsh Stability</p>
+        <p>
+          This project examines how climate change, overfishing, and predator loss interact to destabilize coastal salt marsh ecosystems through trophic cascades involving the herbivorous crab <em>Sesarma reticulatum</em>. Focused on Waquoit Bay NERR, the research traces how Sesarma's burrowing and grazing behaviors weaken the root systems of <em>Spartina alterniflora</em>, leading to erosion, plant die-off, and increased vulnerability to sea-level rise.
+        </p>
+        <div class="about-skills">
+          <span class="tag">Ecological Field Sampling</span>
+          <span class="tag">Species Identification</span>
+          <span class="tag">Soil & Sediment Analysis</span>
+          <span class="tag">Predator–Prey Dynamics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="section-label">Field Notes</div>
+    <h2 class="section-title">From the<br><em>field</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-01.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-01.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-02.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-02.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-03.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-03.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-04.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-04.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-05.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-05.jpg</p></div>
+    </div>
+    <div class="gallery-item">
+      <img src="./assets/images/gallery/field-06.jpg" alt="Field work" onerror="this.parentElement.querySelector('.gallery-item-ph').style.display='flex';this.style.display='none'">
+      <div class="gallery-item-ph" style="display:none"><p>field-06.jpg</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's<br><em>connect</em></h2>
+    <p>
+      Interested in collaborative research, mentorship, or just want to talk about coastal ecosystems and community science? Reach out below.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:your@email.com" class="contact-link">Email</a>
+      <a href="https://www.linkedin.com/in/divine-siam-1505561a3/" class="contact-link" target="_blank">LinkedIn</a>
+      <a href="./assets/Divine_Siam_CV.pdf" class="contact-link" target="_blank">Download CV</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="nav-logo">Divine Siam</span>
+  <p>Climate & Social-Ecological Researcher · Columbia Climate School</p>
+</footer>
+
+<script>
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+const toggle = document.getElementById('navToggle');
+const menu = document.getElementById('mobileMenu');
+toggle.addEventListener('click', () => menu.classList.toggle('open'));
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.exp-item').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
