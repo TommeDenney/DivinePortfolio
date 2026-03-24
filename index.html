@@ -224,10 +224,19 @@ section{padding:clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,4rem)}
 .exp-desc{font-size:0.9rem;font-weight:300;color:var(--text-mid);line-height:1.75;max-width:640px}
 .exp-desc ul{margin:0.75rem 0 0 1.2rem}
 .exp-desc li{margin-bottom:0.4rem}
-.exp-photo{
-  margin-top:1.25rem;height:220px;border-radius:2px;
-  overflow:hidden;background:var(--sage-pale);max-width:480px;
+.exp-photos{
+  display:flex;gap:8px;margin-top:1.25rem;
+  overflow-x:auto;scrollbar-width:thin;
+  scrollbar-color:var(--sage-pale) transparent;
+  padding-bottom:6px;max-width:700px;
 }
+.exp-photos:empty{display:none}
+.exp-photos img{
+  height:200px;width:auto;min-width:140px;max-width:300px;
+  object-fit:cover;border-radius:2px;flex-shrink:0;
+  cursor:pointer;transition:opacity 0.2s;
+}
+.exp-photos img:hover{opacity:0.88}
 
 /* ── RECOGNITION ── */
 #recognition{background:var(--forest);color:var(--cream)}
@@ -524,9 +533,7 @@ footer p{font-size:0.75rem;letter-spacing:0.05em;font-weight:300}
             <li>Supporting ethical data stewardship practices with partner NGO teams, focusing on collaborative data sovereignty and Indigenous knowledge systems.</li>
           </ul>
         </div>
-        <div class="exp-photo">
-          <img src="./assets/images/experience/lamont.jpg" alt="Lamont-Doherty" onerror="this.style.display='none'">
-        </div>
+        <div class="exp-photos" data-folder="assets/images/experience/lamont"></div>
       </div>
 
       <div class="exp-item">
@@ -544,9 +551,7 @@ footer p{font-size:0.75rem;letter-spacing:0.05em;font-weight:300}
             <li>Developed educational materials focused on conservation, ecosystem health, and climate resilience.</li>
           </ul>
         </div>
-        <div class="exp-photo">
-          <img src="./assets/images/experience/conservancy.jpg" alt="Conservancy of SW Florida" onerror="this.style.display='none'">
-        </div>
+        <div class="exp-photos" data-folder="assets/images/experience/conservancy"></div>
       </div>
 
       <div class="exp-item">
@@ -564,9 +569,7 @@ footer p{font-size:0.75rem;letter-spacing:0.05em;font-weight:300}
             <li>Communicated findings through written reports, data visualizations, and oral presentations to local stakeholders and conservation practitioners.</li>
           </ul>
         </div>
-        <div class="exp-photo">
-          <img src="./assets/images/experience/cambodia.jpg" alt="Cambodia fieldwork" onerror="this.style.display='none'">
-        </div>
+        <div class="exp-photos" data-folder="assets/images/experience/cambodia-field-research"></div>
       </div>
 
       <div class="exp-item">
@@ -584,6 +587,7 @@ footer p{font-size:0.75rem;letter-spacing:0.05em;font-weight:300}
             <li>Analyzed socio-economic and environmental impacts of industrial developments on Indigenous sovereignty, livelihoods, and biodiversity.</li>
           </ul>
         </div>
+        <div class="exp-photos" data-folder="assets/images/experience/cambodia-community-research"></div>
       </div>
 
       <div class="exp-item">
@@ -597,9 +601,7 @@ footer p{font-size:0.75rem;letter-spacing:0.05em;font-weight:300}
         <div class="exp-desc">
           <p>Performed measurements on salt marsh cordgrass (<em>Spartina alterniflora</em> and <em>Spartina patens</em>), evaluating geometry, size, and flexibility to assess their role in wave energy reduction and velocity thresholds.</p>
         </div>
-        <div class="exp-photo">
-          <img src="./assets/images/experience/mit.jpg" alt="MIT salt marsh research" onerror="this.style.display='none'">
-        </div>
+        <div class="exp-photos" data-folder="assets/images/experience/mit"></div>
       </div>
 
       <div class="exp-item">
@@ -618,9 +620,7 @@ footer p{font-size:0.75rem;letter-spacing:0.05em;font-weight:300}
             <li>Led educational outreach programs engaging 30+ children in summer science programs.</li>
           </ul>
         </div>
-        <div class="exp-photo">
-          <img src="./assets/images/experience/waquoit.jpg" alt="Waquoit Bay fieldwork" onerror="this.style.display='none'">
-        </div>
+        <div class="exp-photos" data-folder="assets/images/experience/waquoit"></div>
       </div>
 
     </div>
@@ -787,6 +787,28 @@ const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, {threshold: 0.1});
 document.querySelectorAll('.exp-item').forEach(el => obs.observe(el));
+
+function probeImages(folder, container, index) {
+  const exts = ['jpg','png','jpeg','webp'];
+  let tried = 0;
+  function tryNext(extIndex) {
+    if (extIndex >= exts.length) return;
+    const img = new Image();
+    const src = `${folder}/${index}.${exts[extIndex]}`;
+    img.onload = () => {
+      img.src = src;
+      container.appendChild(img);
+      probeImages(folder, container, index + 1);
+    };
+    img.onerror = () => tryNext(extIndex + 1);
+    img.src = src;
+  }
+  tryNext(0);
+}
+
+document.querySelectorAll('.exp-photos').forEach(container => {
+  probeImages(container.dataset.folder, container, 0);
+});
 </script>
 </body>
 </html>
